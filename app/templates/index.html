@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Flask HTMX ALPINE App</title>
+    <!-- HTMX -->
+    <script src="https://unpkg.com/htmx.org@1.5.0"></script>
+</head>
+
+<body>
+    <h1>Book Recommendations</h1>
+    <form hx-post="/submit" hx-swap="beforeend" hx-target="#new-book">
+        <input type="text" placeholder="Book Title" name="title" />
+        <input type="text" placeholder="Book Author" name="author" />
+        <button type="submit">Submit</button>
+    </form>
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Book Title</th>
+            <th scope="col">Book Author</th>
+          </tr>
+        </thead>
+        <tbody id="new-book"> 
+            {%for i in books%}
+            <tr>
+                <td>{{i.title}}</td>
+                <td>{{i.author}}</td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+
+</body>
+</html>
