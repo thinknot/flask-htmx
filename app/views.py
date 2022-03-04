@@ -11,31 +11,22 @@ def home():
 
     for book in books:
         author = Author.query.get(book.author_id)
-        book_object = {"title": book.title, "author": author.name}
+        book_object = {"id": book.book_id, "title": book.title, "author": author.name}
         books_list.append(book_object)
 
     return render_template("index.html", books=books_list)
 
-@app.route("/get")
-def get_books():
-    #books = db.session.query(Book).all()
-    authors = db.session.query(Author).all()
+@app.route("/delete/<int:id>", methods=["DELETE"])
+def delete_book(id):
+    book = Book.query.get(id)
+    db.session.delete(book)
+    db.session.commit()
 
-    authors_list = []
-
-    for author in authors:
-        author_object = {"author": author.name, "books": author.books}
-        print(author_object)
-
-    authors_list.append(author_object)
-
-    return jsonify({"authors": authors_list})
-    #return authors
+    return ""
 
 @app.route("/submit", methods=["POST"])
 def submit():
-    #Author = models.Author
-    #Book = models.Book
+    global_book_object = Book()
 
     title = request.form["title"]
     author_name = request.form["author"]
@@ -48,6 +39,7 @@ def submit():
         book = Book(author_id=author_id, title=title)
         db.session.add(book)
         db.session.commit()
+        global_book_object = book
     else:
         author = Author(name=author_name)
         db.session.add(author)
@@ -56,14 +48,15 @@ def submit():
         book = Book(author_id=author.author_id, title=title)
         db.session.add(book)
         db.session.commit()
-
-    #book_d = {"title": title, "author": author}
-    #data.append(book_d)
+        global_book_object = book
 
     response = f"""
     <tr>
         <td>{title}</td>
         <td>{author_name}</td>
-        </tr>
+        <td>
+            <button hx-delete="/delete/{global_book_object.book_id}">Delete</button>
+        </td>
+    </tr>
     """
     return response
