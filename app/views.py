@@ -16,6 +16,73 @@ def home():
 
     return render_template("index.html", books=books_list)
 
+@app.route("/get-book-row/<int:id>", methods=["GET"])
+def get_book_row(id):
+    book = Book.query.get(id)
+    author = Author.query.get(book.author_id)
+
+    response = f"""
+    <tr>
+        <td>{book.title}</td>
+        <td>{author.name}</td>
+        <td>
+            <button
+                hx-get="/get-edit-form/{id}">
+                Edit Title
+            </button>
+        </td>
+        <td>
+            <button hx-delete="/delete/{id}">Delete</button>
+        </td>
+    </tr>
+    """
+    return response
+
+@app.route("/get-edit-form/<int:id>", methods=["GET"])
+def get_edit_form(id):
+    book = Book.query.get(id)
+    author = Author.query.get(book.author_id)
+
+    response = f"""
+    <tr>
+    <form>
+        <td><input name="title" value="{book.title}"/></td>
+        <td>{author.name}</td>
+        <td>
+            <button hx-get="/get-book-row/{id}">Cancel</button>
+            <button hx-put="/update/{id}" hx-include="closest tr">Save</button>
+        </td>
+    </form>
+    </tr>
+    """
+    return response
+
+@app.route("/update/<int:id>", methods=["PUT"])
+def update_book(id):
+    db.session.query(Book).filter(Book.book_id == id).update({"title": request.form["title"]})
+    db.session.commit()
+
+    title = request.form["title"]
+    book = Book.query.get(id)
+    author = Author.query.get(book.author_id)
+    
+    response = f"""
+    <tr>
+        <td>{title}</td>
+        <td>{author.name}</td>
+        <td>
+            <button
+                hx-get="/get-edit-form/{id}">
+                Edit Title
+            </button>
+        </td>
+        <td>
+            <button hx-delete="/delete/{id}">Delete</button>
+        </td>
+    </tr>
+    """
+    return response 
+
 @app.route("/delete/<int:id>", methods=["DELETE"])
 def delete_book(id):
     book = Book.query.get(id)
@@ -54,6 +121,12 @@ def submit():
     <tr>
         <td>{title}</td>
         <td>{author_name}</td>
+        <td>
+            <button
+                hx-get="/get-edit-form/{global_book_object.book_id}">
+                Edit Title
+            </button>
+        </td>
         <td>
             <button hx-delete="/delete/{global_book_object.book_id}">Delete</button>
         </td>

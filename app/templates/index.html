@@ -13,7 +13,7 @@
 
         tr.htmx-swapping td {
             opacity: 0;
-            transition: opacity 1s ease-out;
+            transition: opacity 0.5s ease-out;
         }
 
         td, th {
@@ -43,11 +43,17 @@
             <th scope="col">Book Author</th>
           </tr>
         </thead>
-        <tbody id="new-book" hx-target="closest tr" hx-swap="outerHTML swap:1s"> 
+        <tbody id="new-book" hx-target="closest tr" hx-swap="outerHTML swap:0.5s"> 
             {%for i in books%}
             <tr>
                 <td>{{i.title}}</td>
                 <td>{{i.author}}</td>
+                <td>
+                    <button
+                        hx-get="/get-edit-form/{{i.id}}">
+                        Edit Title
+                    </button>
+                </td>
                 <td>
                     <button hx-delete="/delete/{{i.id}}">Delete</button>
                 </td>
