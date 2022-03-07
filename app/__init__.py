@@ -4,8 +4,6 @@ from app import create_db
 import os
 persistent_path = os.getenv("PERSISTENT_STORAGE_DIR")
 
-#create_db.create_connection("sqlite.db", persistent_path)
-
 app = Flask(__name__)
 
 db_path = os.path.join(persistent_path, "sqlite.db")
