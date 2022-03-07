@@ -5,7 +5,7 @@ persistent_path = os.getenv("PERSISTENT_STORAGE_DIR")
 
 app = Flask(__name__)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite://{persistent_path}/sqlite.db'
+app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///{persistent_path}/sqlite.db'
 app.config["SQLALCHEMY_ECHO"] = False
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
