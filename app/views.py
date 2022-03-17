@@ -47,22 +47,18 @@ def get_edit_form(id):
     author = Author.query.get(book.author_id)
 
     response = f"""
-    <tr>
-    <form>
-        <td><input name="title" value="{book.title}"/></td>
-        <td>{author.name}</td>
-        <td>
-            <button hx-get="/get-book-row/{id}"
-                class="btn btn-primary">
-                Cancel
-            </button>
-            <button hx-put="/update/{id}" hx-include="closest tr"
-                class="btn btn-primary">
-                Save
-            </button>
-        </td>
-    </form>
-    </tr>
+    <tr hx-trigger='cancel' class='editing' hx-get="/get-book-row/{id}">
+  <td><input name="title" value="{book.title}"/></td>
+  <td>{author.name}</td>
+  <td>
+    <button class="btn btn-primary" hx-get="/get-book-row/{id}">
+      Cancel
+    </button>
+    <button class="btn btn-primary" hx-put="/update/{id}" hx-include="closest tr">
+      Save
+    </button>
+  </td>
+</tr>
     """
     return response
 
