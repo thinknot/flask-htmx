@@ -12,20 +12,24 @@
 </p>
 
 <h1 align="center">
-  How to Deploy a Flask HTMx Application to Production
+  How to deploy a Flask HTMx application to production
 </h1>
 
 <p align="center">
-    <img src="https://img.shields.io/badge/-Flask-white?style=flat&logo=flask&logoColor=black">&nbsp;&nbsp;
-    <img src="https://img.shields.io/badge/Python-%ffE34F26.svg?style=flat&logo=python&logoColor=white">&nbsp;&nbsp;
-    <img src="https://img.shields.io/badge/htmx-%23E34F26.svg?style=flat&logo=html5&logoColor=white">&nbsp;&nbsp;
+<img src="https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white">
+<img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54">
+<img src="https://img.shields.io/badge/htmlx-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white">
 </p>
+
 
 <br/>
 
-<p align="center">
-This is the code to accompany the tutorial available at <a href="https://codecapsules.io/docs/deployment/how-to-deploy-flask-htmx-application-to-production">https://codecapsules.io/docs/deployment/how-to-deploy-flask-htmx-application-to-production</a>
+<p>
+This is the code to accompany the tutorial available at <a href="https://codecapsules.io/docs/deployment/how-to-deploy-flask-htmx-application-to-production">How to deploy a Flask HTMx application to production</a>
 </p>
 
+You might also be interested in our other resources:
 
+* **[Deployment guides](http://codecapsules.io/docs/deployment/):** quick-start guides to deploy specific frameworks and languages to production environments.
+* **[Tutorials](http://codecapsules.io/docs/tutorials/):** detailed project walkthroughs to help you learn specific frameworks and langauges.
 
